@@ -1,0 +1,115 @@
+{% extends "base.html" %}
+
+{% block title %}Login - Weather Forecast App{% endblock %}
+
+{% block content %}
+<style>
+/* Weather-themed animated background */
+.weather-background {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background: linear-gradient(to top, #6dd5fa, #2980b9);
+    overflow: hidden;
+}
+
+.cloud {
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+    width: 150px;
+    height: 80px;
+    top: 10%;
+    animation: float 60s linear infinite;
+}
+
+.cloud::before,
+.cloud::after {
+    content: "";
+    position: absolute;
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 50%;
+}
+
+.cloud::before {
+    width: 80px; height: 80px;
+    top: -20px; left: 30px;
+}
+
+.cloud::after {
+    width: 100px; height: 100px;
+    top: -40px; left: 80px;
+}
+
+.cloud:nth-child(1) { top: 15%; left: -200px; animation-delay: 0s; }
+.cloud:nth-child(2) { top: 30%; left: -300px; animation-delay: 15s; }
+.cloud:nth-child(3) { top: 50%; left: -400px; animation-delay: 30s; }
+.cloud:nth-child(4) { top: 70%; left: -500px; animation-delay: 45s; }
+
+@keyframes float {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(150vw); }
+}
+</style>
+
+<div class="weather-background">
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+    <div class="cloud"></div>
+</div>
+
+<div class="row justify-content-center align-items-center" style="min-height: 100vh;">
+    <div class="col-md-8 col-lg-5">
+        <div class="card shadow-lg">
+            <div class="card-header bg-primary text-white text-center py-4">
+                <h2 class="mb-0">
+                    <i class="fas fa-sign-in-alt me-2"></i>Login to Weather Forecast
+                </h2>
+                <p class="mb-0 mt-2">Choose your forecast preference</p>
+            </div>
+            <div class="card-body p-5">
+                <form method="POST" id="loginForm">
+                    <div class="mb-4">
+                        <label for="username" class="form-label fw-bold">Username</label>
+                        <input type="text" class="form-control form-control-lg" id="username" name="username" required>
+                        <div class="form-text">
+                            <small>Use: admin</small>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-4">
+                        <label for="password" class="form-label fw-bold">Password</label>
+                        <input type="password" class="form-control form-control-lg" id="password" name="password" required>
+                        <div class="form-text">
+                            <small>Passwords: admin123</small>
+                        </div>
+                    </div>
+                    
+                    <div class="d-grid gap-2">
+                        <button type="submit" class="btn btn-primary btn-lg">
+                            <i class="fas fa-sign-in-alt me-2"></i>Login
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card mt-4 shadow-sm">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <i class="fas fa-info-circle me-2"></i>Demo Accounts
+                </h5>
+                <div class="row">
+                    <div class="col-md-12">
+                        <strong>Admin:</strong><br>
+                        <small>Username: admin<br>Password: admin123</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block title %}Features - Weather Forecast App{% endblock %}
+
+{% block content %}
+<div class="text-center mb-5">
+    <h1 class="display-5 fw-bold text-primary mb-3">App Features</h1>
+    <p class="lead">Discover all the powerful features that make our weather app stand out</p>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-lg-4">
+        <div class="card h-100 shadow-sm feature-card">
+            <div class="card-body text-center p-4">
+                <div class="feature-icon text-primary mb-3">
+                    <i class="fas fa-thermometer-half fa-4x"></i>
+                </div>
+                <h4 class="card-title">Dual Temperature Display</h4>
+                <p class="card-text">
+                    View temperatures in both Celsius and Fahrenheit simultaneously. 
+                    Perfect for international users and those who prefer different units.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card h-100 shadow-sm feature-card">
+            <div class="card-body text-center p-4">
+                <div class="feature-icon text-success mb-3">
+                    <i class="fas fa-lightbulb fa-4x"></i>
+                </div>
+                <h4 class="card-title">Weather Tips</h4>
+                <p class="card-text">
+                    Get personalized weather-related tips and recommendations based on 
+                    current conditions to help you prepare for the day.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card h-100 shadow-sm feature-card">
+            <div class="card-body text-center p-4">
+                <div class="feature-icon text-warning mb-3">
+                    <i class="fas fa-sun fa-4x"></i>
+                </div>
+                <h4 class="card-title">Sunrise & Sunset</h4>
+                <p class="card-text">
+                    Know exactly when the sun rises and sets in your location. 
+                    Perfect for photographers and outdoor activity planners.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-lg-4">
+        <div class="card h-100 shadow-sm feature-card">
+            <div class="card-body text-center p-4">
+                <div class="feature-icon text-info mb-3">
+                    <i class="fas fa-wind fa-4x"></i>
+                </div>
+                <h4 class="card-title">Wind Conditions</h4>
+                <p class="card-text">
+                    Detailed wind information including speed and direction. 
+                    Essential for sailors, pilots, and outdoor sports enthusiasts.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card h-100 shadow-sm feature-card">
+            <div class="card-body text-center p-4">
+                <div class="feature-icon text-primary mb-3">
+                    <i class="fas fa-tint fa-4x"></i>
+                </div>
+                <h4 class="card-title">Humidity & Pressure</h4>
+                <p class="card-text">
+                    Monitor atmospheric pressure and humidity levels. 
+                    Important for health-conscious individuals and weather enthusiasts.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-lg-4">
+        <div class="card h-100 shadow-sm feature-card">
+            <div class="card-body text-center p-4">
+                <div class="feature-icon text-success mb-3">
+                    <i class="fas fa-mobile-alt fa-4x"></i>
+                </div>
+                <h4 class="card-title">Responsive Design</h4>
+                <p class="card-text">
+                    Access weather information seamlessly across all devices - 
+                    desktop, tablet, and mobile with optimized layouts.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card bg-light">
+    <div class="card-body p-5">
+        <h2 class="text-center mb-4">
+            <i class="fas fa-users me-2"></i>User Types & Access Levels
+        </h2>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="user-type-icon text-primary mb-3">
+                        <i class="fas fa-calendar-day fa-3x"></i>
+                    </div>
+                    <h5>Daily Forecast Users</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li><i class="fas fa-check text-success me-2"></i>Current weather conditions</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Daily temperature range</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Weather tips and advice</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Sunrise/sunset times</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="user-type-icon text-success mb-3">
+                        <i class="fas fa-clock fa-3x"></i>
+                    </div>
+                    <h5>Hourly Forecast Users</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li><i class="fas fa-check text-success me-2"></i>24-hour detailed forecast</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Hourly temperature changes</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Precipitation probability</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Wind speed per hour</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="text-center">
+                    <div class="user-type-icon text-warning mb-3">
+                        <i class="fas fa-calendar-alt fa-3x"></i>
+                    </div>
+                    <h5>Extended Forecast Users</h5>
+                    <ul class="list-unstyled text-muted">
+                        <li><i class="fas fa-check text-success me-2"></i>5-day weather forecast</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Weekly weather trends</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Long-term planning data</li>
+                        <li><i class="fas fa-check text-success me-2"></i>Weather pattern analysis</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-5">
+    <h3 class="mb-3">Ready to Experience All Features?</h3>
+    <a href="{{ url_for('login') }}" class="btn btn-primary btn-lg">
+        <i class="fas fa-sign-in-alt me-2"></i>Login Now
+    </a>
+</div>
+{% endblock %}

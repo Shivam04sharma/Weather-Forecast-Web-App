@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Weather Forecast App{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-12">
+        <div class="welcome-banner bg-gradient-primary text-white rounded-3 p-4 mb-4">
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <h1 class="display-6 fw-bold mb-2">
+                        <i class="fas fa-tachometer-alt me-2"></i>Welcome, {{ session.username }}!
+                    </h1>
+                    <p class="lead mb-0">
+                        You're logged in as a <strong>{{ session.user_type.title() }}</strong> user. 
+                        Ready to check the weather?
+                    </p>
+                </div>
+                <div class="col-md-4 text-end">
+                    <i class="fas fa-user-circle fa-5x text-white-50"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center p-4">
+                <div class="feature-icon text-primary mb-3">
+                    <i class="fas fa-cloud-sun fa-4x"></i>
+                </div>
+                <h4 class="card-title">Check Weather</h4>
+                <p class="card-text">
+                    Get detailed weather information for any city worldwide. 
+                    Access {{ session.user_type }} forecast data tailored to your needs.
+                </p>
+                <a href="{{ url_for('weather') }}" class="btn btn-primary btn-lg">
+                    <i class="fas fa-search me-2"></i>Check Weather
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center p-4">
+                <div class="feature-icon text-success mb-3">
+                    <i class="fas fa-cog fa-4x"></i>
+                </div>
+                <h4 class="card-title">Your Access Level</h4>
+                <p class="card-text">
+                    You have access to <strong>{{ session.user_type.title() }}</strong> forecast features.
+                    {% if session.user_type == 'daily' %}
+                    View current weather conditions and daily forecasts.
+                    {% elif session.user_type == 'hourly' %}
+                    Access detailed hourly weather updates for the next 24 hours.
+                    {% elif session.user_type == 'forecast' %}
+                    Get extended 5-day weather forecasts and trends.
+                    {% endif %}
+                </p>
+                <a href="{{ url_for('features') }}" class="btn btn-success btn-lg">
+                    <i class="fas fa-info-circle me-2"></i>View Features
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card bg-light">
+    <div class="card-body p-4">
+        <h3 class="card-title mb-4">
+            <i class="fas fa-star me-2"></i>Your Weather Dashboard Features
+        </h3>
+        <div class="row g-3">
+            <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-thermometer-half text-primary me-3 fa-2x"></i>
+                    <div>
+                        <h6 class="mb-1">Temperature Display</h6>
+                        <small class="text-muted">Both Celsius and Fahrenheit</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-lightbulb text-warning me-3 fa-2x"></i>
+                    <div>
+                        <h6 class="mb-1">Weather Tips</h6>
+                        <small class="text-muted">Personalized recommendations</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-sun text-success me-3 fa-2x"></i>
+                    <div>
+                        <h6 class="mb-1">Sunrise & Sunset</h6>
+                        <small class="text-muted">Exact timing for your location</small>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="d-flex align-items-center">
+                    <i class="fas fa-wind text-info me-3 fa-2x"></i>
+                    <div>
+                        <h6 class="mb-1">Wind Conditions</h6>
+                        <small class="text-muted">Speed and direction data</small>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="text-center mt-5">
+    <h4 class="mb-3">Ready to Get Started?</h4>
+    <a href="{{ url_for('weather') }}" class="btn btn-primary btn-lg me-3">
+        <i class="fas fa-cloud-sun me-2"></i>Check Weather Now
+    </a>
+    <a href="{{ url_for('logout') }}" class="btn btn-outline-secondary btn-lg">
+        <i class="fas fa-sign-out-alt me-2"></i>Logout
+    </a>
+</div>
+{% endblock %}

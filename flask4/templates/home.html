@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Home - Weather Forecast App{% endblock %}
+
+{% block content %}
+<div class="hero-section bg-primary text-white rounded-3 p-5 mb-5">
+    <div class="row align-items-center">
+        <div class="col-lg-6">
+            <h1 class="display-4 fw-bold mb-3">
+                <i class="fas fa-cloud-sun me-3"></i>Weather Forecast
+            </h1>
+            <p class="lead mb-4">
+                Get accurate and detailed weather forecasts for any location worldwide. 
+                Choose from daily, hourly, or upcoming days forecasts tailored to your needs.
+            </p>
+            <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+                <a href="{{ url_for('login') }}" class="btn btn-light btn-lg px-4 me-md-2">
+                    <i class="fas fa-sign-in-alt me-2"></i>Get Started
+                </a>
+                <a href="{{ url_for('features') }}" class="btn btn-outline-light btn-lg px-4">
+                    <i class="fas fa-info-circle me-2"></i>Learn More
+                </a>
+            </div>
+        </div>
+        <div class="col-lg-6 text-center">
+            <i class="fas fa-cloud-rain display-1 text-white-50"></i>
+        </div>
+    </div>
+</div>
+
+<div class="row g-4 mb-5">
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <div class="feature-icon text-primary mb-3">
+                    <i class="fas fa-calendar-day fa-3x"></i>
+                </div>
+                <h5 class="card-title">Daily Forecast</h5>
+                <p class="card-text">
+                    Get comprehensive daily weather information including temperature, 
+                    humidity, wind conditions, and weather tips.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <div class="feature-icon text-success mb-3">
+                    <i class="fas fa-clock fa-3x"></i>
+                </div>
+                <h5 class="card-title">Hourly Forecast</h5>
+                <p class="card-text">
+                    Plan your day with detailed hourly weather updates 
+                    for the next 24 hours with precise timing.
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="card h-100 shadow-sm">
+            <div class="card-body text-center">
+                <div class="feature-icon text-warning mb-3">
+                    <i class="fas fa-calendar-alt fa-3x"></i>
+                </div>
+                <h5 class="card-title">5-Day Forecast</h5>
+                <p class="card-text">
+                    Stay prepared with extended weather forecasts 
+                    for the upcoming days to plan your activities.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-lg-10 mx-auto text-center">
+        <h2 class="mb-4">Why Choose Our Weather App?</h2>
+        <div class="row g-3">
+            <div class="col-md-6 text-start">
+                <div class="btn btn-outline-success w-100 d-flex align-items-center justify-content-start">
+                    <i class="fas fa-shield-alt me-3 fa-2x"></i>
+                    <div>
+                        <h6 class="mb-0">Reliable Data</h6>
+                        <small>Powered by OpenWeatherMap API</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 text-start">
+                <div class="btn btn-outline-primary w-100 d-flex align-items-center justify-content-start">
+                    <i class="fas fa-mobile-alt me-3 fa-2x"></i>
+                    <div>
+                        <h6 class="mb-0">Responsive Design</h6>
+                        <small>Works on all devices</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 text-start">
+                <div class="btn btn-outline-warning w-100 d-flex align-items-center justify-content-start">
+                    <i class="fas fa-lightbulb me-3 fa-2x"></i>
+                    <div class="me-3 text-start">
+                        <h6 class="mb-0">Weather Tips</h6>
+                        <small>Helpful advice for any weather</small>
+                    </div>
+                    
+                </div>
+            </div>
+
+            <div class="col-md-6 text-start">
+                <div class="btn btn-outline-info w-100 d-flex align-items-center justify-content-start">
+                    <i class="fas fa-thermometer-half me-3 fa-2x"></i>
+                    <div class="me-3 text-start">
+                        <h6 class="mb-0">Dual Temperature</h6>
+                        <small>Both Celsius and Fahrenheit</small>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

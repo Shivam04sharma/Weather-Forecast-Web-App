@@ -1,0 +1,219 @@
+{% extends "base.html" %}
+
+{% block title %}Weather - Weather Forecast App{% endblock %}
+
+{% block content %}
+<div class="row">
+    <div class="col-lg-4">
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-search me-2"></i>Weather Search
+                </h5>
+            </div>
+            <div class="card-body">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label for="city" class="form-label">Enter City Name</label>
+                        <input type="text" class="form-control" id="city" name="city" 
+                               placeholder="e.g., London, New York" required>
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="forecast_type" class="form-label">Forecast Type</label>
+                        <select class="form-select" id="forecast_type" name="forecast_type">
+                            <option value="current" {% if user_type == 'daily' %}selected{% endif %}>Current Weather</option>
+                            <option value="hourly" {% if user_type == 'hourly' %}selected{% endif %}>Hourly Forecast</option>
+                            <option value="daily" {% if user_type == 'forecast' %}selected{% endif %}>5-Day Forecast</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-primary w-100">
+                        <i class="fas fa-search me-2"></i>Get Weather
+                    </button>
+                </form>
+            </div>
+        </div>
+        
+        <div class="card shadow-sm">
+            <div class="card-body">
+                <h6 class="card-title">
+                    <i class="fas fa-info-circle me-2"></i>Your Access Level
+                </h6>
+                <p class="card-text">
+                    <span class="badge bg-{{ 'primary' if user_type == 'daily' else 'success' if user_type == 'hourly' else 'warning' }} me-2">
+                        {{ user_type.title() }}
+                    </span>
+                    {% if user_type == 'daily' %}
+                    Current weather conditions and daily information
+                    {% elif user_type == 'hourly' %}
+                    Detailed hourly forecasts for the next 24 hours
+                    {% elif user_type == 'forecast' %}
+                    Extended 5-day weather forecasts
+                    {% endif %}
+                </p>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-lg-8">
+        {% if current_weather %}
+        <div class="card shadow-sm mb-4">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-map-marker-alt me-2"></i>Current Weather - {{ current_weather.city }}, {{ current_weather.country }}
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="weather-display text-center">
+                            <img src="https://openweathermap.org/img/wn/{{ current_weather.icon }}@4x.png" 
+                                 alt="{{ current_weather.description }}" class="weather-icon">
+                            <h2 class="temperature-display">
+                                {{ current_weather.temperature_c }}°C / {{ current_weather.temperature_f }}°F
+                            </h2>
+                            <h4 class="text-muted">{{ current_weather.description }}</h4>
+                            <p class="feels-like">
+                                Feels like {{ current_weather.feels_like_c }}°C / {{ current_weather.feels_like_f }}°F
+                            </p>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="weather-details">
+                            <div class="row g-3">
+                                <div class="col-6">
+                                    <div class="weather-stat">
+                                        <i class="fas fa-tint text-primary"></i>
+                                        <strong>Humidity:</strong> {{ current_weather.humidity }}%
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="weather-stat">
+                                        <i class="fas fa-thermometer-half text-success"></i>
+                                        <strong>Pressure:</strong> {{ current_weather.pressure }} hPa
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="weather-stat">
+                                        <i class="fas fa-wind text-info"></i>
+                                        <strong>Wind:</strong> {{ current_weather.wind_speed }} m/s
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="weather-stat">
+                                        <i class="fas fa-compass text-warning"></i>
+                                        <strong>Direction:</strong> {{ current_weather.wind_direction }}°
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="weather-stat">
+                                        <i class="fas fa-sun text-warning"></i>
+                                        <strong>Sunrise:</strong> {{ current_weather.sunrise }}
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="weather-stat">
+                                        <i class="fas fa-moon text-dark"></i>
+                                        <strong>Sunset:</strong> {{ current_weather.sunset }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="card shadow-sm">
+            <div class="card-header bg-info text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-lightbulb me-2"></i>Weather Tips
+                </h5>
+            </div>
+            <div class="card-body">
+                <p class="card-text">
+                    <i class="fas fa-info-circle text-info me-2"></i>
+                    {{ current_weather.tips }}
+                </p>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if hourly_forecast %}
+        <div class="card shadow-sm">
+            <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                    <i class="fas fa-clock me-2"></i>Hourly Forecast - {{ city }}
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    {% for hour in hourly_forecast %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="hourly-card border rounded p-3 text-center">
+                            <h6>{{ hour.time }}</h6>
+                            <small class="text-muted">{{ hour.date }}</small>
+                            <img src="https://openweathermap.org/img/wn/{{ hour.icon }}@2x.png" 
+                                 alt="{{ hour.description }}" class="hourly-icon">
+                            <p class="mb-1">
+                                <strong>{{ hour.temperature_c }}°C / {{ hour.temperature_f }}°F</strong>
+                            </p>
+                            <p class="mb-1">{{ hour.description }}</p>
+                            <small class="text-muted">
+                                <i class="fas fa-tint me-1"></i>{{ hour.humidity }}%
+                                <i class="fas fa-wind ms-2 me-1"></i>{{ hour.wind_speed }} m/s
+                            </small>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if daily_forecast %}
+        <div class="card shadow-sm">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">
+                    <i class="fas fa-calendar-alt me-2"></i>5-Day Forecast - {{ city }}
+                </h5>
+            </div>
+            <div class="card-body">
+                <div class="row g-3">
+                    {% for day in daily_forecast %}
+                    <div class="col-md-6 col-lg-4">
+                        <div class="daily-card border rounded p-3 text-center">
+                            <h6>{{ day.date }}</h6>
+                            <img src="https://openweathermap.org/img/wn/{{ day.icon }}@2x.png" 
+                                 alt="{{ day.description }}" class="daily-icon">
+                            <p class="mb-1">
+                                <strong>{{ day.temperature_c }}°C / {{ day.temperature_f }}°F</strong>
+                            </p>
+                            <p class="mb-1">{{ day.description }}</p>
+                            <small class="text-muted">
+                                <i class="fas fa-tint me-1"></i>{{ day.humidity }}%
+                                <i class="fas fa-wind ms-2 me-1"></i>{{ day.wind_speed }} m/s
+                            </small>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        
+        {% if not current_weather and not hourly_forecast and not daily_forecast %}
+        <div class="card shadow-sm">
+            <div class="card-body text-center py-5">
+                <i class="fas fa-cloud-sun fa-5x text-muted mb-4"></i>
+                <h4 class="text-muted">No Weather Data</h4>
+                <p class="text-muted">
+                    Enter a city name and click "Get Weather" to see forecast information.
+                </p>
+            </div>
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
